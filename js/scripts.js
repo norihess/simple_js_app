@@ -15,5 +15,10 @@ let pokemon3=[
     height: 2.9,
     types: ['dragon', 'electric']
 ];
+let pokemon4=[
+    name: 'Reshiram',
+    height: 3.2,
+    types: ['dragon', 'fire']
+];
 
 
