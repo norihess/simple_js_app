@@ -1,3 +1,4 @@
+//list of pokemon
 let pokemonList =[
 {
     name: 'Ninetales',
