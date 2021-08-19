@@ -1,5 +1,5 @@
 //list of pokemon
-let pokemonList =[
+let pokemonList = [
 {
     name: 'Ninetales',
     height: 1.1,
@@ -22,3 +22,14 @@ let pokemonList =[
     }
 
 ];
+//for loop for array
+//Ninetales
+for (i = 0; i < pokemonList.length; i++){
+    if (pokemonList[i].height < 2 && pokemonList[i].height > 1){
+        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +')</p>')
+    }
+    //Zekrom
+     else if(pokemonList[i].height < 4 && pokemonList[i].height > 2){
+        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +'-Wow that is big!</p>')
+     }
+}
