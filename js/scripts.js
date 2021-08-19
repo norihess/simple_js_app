@@ -22,13 +22,13 @@ let pokemonList = [
     }
 
 ];
-//for loop for array
-//Ninetales
+//for loop with array
+//Ninetales and Houndoom
 for (i = 0; i < pokemonList.length; i++){
     if (pokemonList[i].height < 2 && pokemonList[i].height > 1){
         document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +')</p>')
     }
-    //Zekrom
+    //Zekrom and Reshiram
      else if(pokemonList[i].height < 4 && pokemonList[i].height > 2){
         document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +'-Wow that is big!</p>')
      }
