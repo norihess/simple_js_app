@@ -22,14 +22,34 @@ let pokemonList = [
     }
 
 ];
-//for loop with array
-//Ninetales and Houndoom
-for (i = 0; i < pokemonList.length; i++){
-    if (pokemonList[i].height < 2 && pokemonList[i].height > 1){
-        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +')</p>')
-    }
-    //Zekrom and Reshiram
-     else if(pokemonList[i].height < 4 && pokemonList[i].height > 2){
-        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +'-Wow that is big!</p>')
-     }
-}
+////for loop with array
+////Ninetales and Houndoom
+//for (let i = 0; i < pokemonList.length; i++){
+//    if (pokemonList[i].height < 2 && pokemonList[i].height > 1){
+//        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +')</p>')
+//    }
+//    //Zekrom and Reshiram
+//     else if(pokemonList[i].height < 4 && pokemonList[i].height > 2){
+//        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +'-Wow that is big!</p>')
+//     }
+//}
+
+//let pokemonList = function(){
+//    let pokemonList = [];
+//    
+//    function add(pokemon) {
+//        pokemonList.push(pokemon);
+//    }
+//    
+//    function getAll() {
+//        return pokemonList;
+//    }
+//    
+//    return{
+//        add: add,
+//        getAll: getAll
+//    };
+//})();
+
+pokemonList.forEach (function(pokemonList){
+  document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');});
