@@ -1,3 +1,5 @@
+//IIFE
+let pokemonRepository = (function(){
 //list of pokemon
 let pokemonList = [
 {
@@ -20,8 +22,9 @@ let pokemonList = [
     height: 3.2,
     types: ['dragon', 'fire']
     }
-
 ];
+})();
+
 ////for loop with array
 ////Ninetales and Houndoom
 //for (let i = 0; i < pokemonList.length; i++){
