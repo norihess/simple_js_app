@@ -30,6 +30,7 @@ return pokemonList;
 }
 return {
 getAll: getAll,
+add:add,
 };
 })();
 
