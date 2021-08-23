@@ -24,13 +24,16 @@ let pokemonList = [
     }
 ];
 
+function add(){
+  return pokemonRepository.add(item);
+}
 //create this inside repository so people can access it from outside
 function getAll() {
 return pokemonList;
 }
 return {
 getAll: getAll,
-add:add,
+add: add,
 };
 })();
 
