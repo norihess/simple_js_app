@@ -24,55 +24,58 @@ let pokemonList = [
     }
 ];
 
-function add(){
-  return pokemonRepository.add(item);
-}
+function add(pokemon){
+   if (
+      typeof pokemon === "object" &&
+      "name" in pokemon &&
+      "height" in pokemon &&
+      "types" in pokemon
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
+  }
+
 //create this inside repository so people can access it from outside
 function getAll() {
-return pokemonList;
+    return pokemonList;
 }
-return {
-getAll: getAll,
-add: add,
-};
-    
-document.querySelector(ul);
+function showDetails(pokemon){
+    console.log(pokemon);
+}
+
+function addListItem(pokemon){
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listpokemon = doument.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = 'pokemon.name';
+    button.classList.add('button');
+    button.addEventListener('click', function (event){
+        console.log(event);
+    }
+    listpokemon.apprehendChild(button);
+    pokemonList.apprehendChild(listpokemon);
+}
+  return {
+    add: add,
+    getAll: getAll,
+    addListItem: addListItem
+  };
 })();
+    
 
 
-pokemonRepository.getAll().forEach(function(pokemon){
-    // document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');
-    console.log(pokemon)
-    });
 
-////for loop with array
-////Ninetales and Houndoom
-//for (let i = 0; i < pokemonList.length; i++){
-//    if (pokemonList[i].height < 2 && pokemonList[i].height > 1){
-//        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +')</p>')
-//    }
-//    //Zekrom and Reshiram
-//     else if(pokemonList[i].height < 4 && pokemonList[i].height > 2){
-//        document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height +'-Wow that is big!</p>')
-//     }
-//}
+//pokemonRepository.getAll().forEach(function(pokemon){
+//    // document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');
+//    console.log(pokemon)
+//    });
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({ name: "Pikachu", height: 0.3, types: ["electric"] });
 
-//let pokemonList = function(){
-//    let pokemonList = [];
-//    
-//    function add(pokemon) {
-//        pokemonList.push(pokemon);
-//    }
-//    
-//    function getAll() {
-//        return pokemonList;
-//    }
-//    
-//    return{
-//        add: add,
-//        getAll: getAll
-//    };
-//})();
+console.log(pokemonRepository.getAll());
 
-//pokemonList.forEach (function(pokemonList){
-//  document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');});
+pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon); 
+});
