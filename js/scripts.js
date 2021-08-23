@@ -23,7 +23,21 @@ let pokemonList = [
     types: ['dragon', 'fire']
     }
 ];
+
+//create this inside repository so people can access it from outside
+function getAll() {
+return pokemonList;
+}
+return {
+getAll: getAll,
+};
 })();
+
+
+pokemonRepository.getAll().forEach(function(pokemon){
+    // document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');
+    console.log(pokemon)
+    });
 
 ////for loop with array
 ////Ninetales and Houndoom
@@ -54,5 +68,5 @@ let pokemonList = [
 //    };
 //})();
 
-pokemonList.forEach (function(pokemonList){
-  document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');});
+//pokemonList.forEach (function(pokemonList){
+//  document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');});
