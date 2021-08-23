@@ -35,6 +35,8 @@ return {
 getAll: getAll,
 add: add,
 };
+    
+document.querySelector(ul);
 })();
 
 
