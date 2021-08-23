@@ -1,4 +1,18 @@
-button { /*resume button*/
+:root{
+/*colors*/
+--primary-color: #00022e;
+--secondary-color: #2e5984;
+--third-color: #000000;
+--white:#ffffff;
+/*fonts*/
+--primary-font: 'Noto Sans SC', sans-serif;
+--primary-weight: 400;
+--secondary-weight: 600;
+--base: 16px;
+--headers: 20px;
+}
+    
+.button { /*resume button*/
     /* overwrites browser defaults and resets the border */
     border: none;
     /* takes the font from the outer container */
@@ -15,7 +29,7 @@ button { /*resume button*/
     border-bottom: 2px solid rgba(0, 0, 0, 0.8);
 }
 
-button:hover, button:focus {
+.button:hover, button:focus {
     /* lets the mouse appear as a hand when hovering over the button */
     cursor: pointer;
     /* reduces the opacity of the button to 80% */
