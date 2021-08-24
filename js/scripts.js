@@ -54,10 +54,10 @@ function addListItem(pokemon){
     listpokemon.apprehendChild(button);
     pokemonList.apprehendChild(listpokemon);
     
-    button.querySelector('button');
-    button.addEventListener('click', function(event){
+//    button.querySelector('button');
+    button.addEventListener('click', function(pokemon){
         showDetails(pokemon);
-    })
+    });
 };
   return {
     add: add,
