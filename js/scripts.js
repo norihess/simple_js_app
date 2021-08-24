@@ -54,6 +54,7 @@ function addListItem(pokemon){
     listpokemon.apprehendChild(button);
     pokemonList.apprehendChild(listpokemon);
     
+    button.querySelector('button');
     button.addEventListener('click', function(event){
         showDetails(pokemon);
     })
