@@ -1,9 +1,13 @@
+* {
+    box-sizing: border-box;
+}
 :root{
 /*colors*/
 --primary-color: #00022e;
 --secondary-color: #2e5984;
 --third-color: #000000;
 --white:#ffffff;
+--gray: #fafafa
 /*fonts*/
 --primary-font: 'Noto Sans SC', sans-serif;
 --primary-weight: 400;
@@ -11,7 +15,24 @@
 --base: 16px;
 --headers: 20px;
 }
-    
+body {
+    background-color: var(--white);
+    color: var(--third-color);
+    font-family: var(--primary-font);
+    font-weight: var(--primary-weight);
+    font-size: var(--base);
+    /* Sets the font size to 16px */
+    line-height: 1.6;
+    /* Sets the line-height to 1.6 */
+} 
+header{
+    position: absolute;
+    margin-left: 30px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+/*        background-color: red;*/
+}
 .button { /*resume button*/
     /* overwrites browser defaults and resets the border */
     border: none;
