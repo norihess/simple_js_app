@@ -47,12 +47,12 @@ function showDetails(pokemon){
 
 function addListItem(pokemon){
     let pokemonList = document.querySelector('.pokemon-list');
-    let listpokemon = doument.createElement('li');
+    let listpokemon = document.createElement('li');
     let button = document.createElement('button');
     button.innerText = 'pokemon.name';
     button.classList.add('button');
-    listpokemon.apprehendChild(button);
-    pokemonList.apprehendChild(listpokemon);
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
     
 //    button.querySelector('button');
     button.addEventListener('click', function(pokemon){
