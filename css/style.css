@@ -25,14 +25,15 @@ body {
     line-height: 1.6;
     /* Sets the line-height to 1.6 */
 } 
+
 .button { /*resume button*/
     /* overwrites browser defaults and resets the border */
-    border: none;
+    border: var(--primary-color);
     /* takes the font from the outer container */
     font-family: inherit;
     /* styles the background color, font color, and text decoration (underline, etc.) of the button */
-    background-color: var(--primary-color);
-    color: var(--white);
+    background-color: #bfcbd2;
+    color: var(--pimary-color);
     text-decoration: none;
     /*adds spacing to the button (this will be discussed more in-depth later) */
     padding: 10px;
