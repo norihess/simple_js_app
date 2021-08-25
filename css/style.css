@@ -48,3 +48,9 @@ body {
     /* reduces the opacity of the button to 80% */
     opacity: 0.8;
 }
+.additional-information {
+  display: none;
+}
+.additional-information.is-visible {
+  display: block;
+}
