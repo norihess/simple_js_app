@@ -5,7 +5,8 @@ let pokemonList = [];
 let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; 
 
 let modalContainer = document.querySelector('#modal-container');
-  function showModal() {
+
+function showModal() {
     modalContainer.innerHTML = '';
     let modal = document.createElement('div');
     modal.classList.add('modal');
@@ -16,19 +17,19 @@ let modalContainer = document.querySelector('#modal-container');
     closeButtonElement.addEventListener('click', hideModal);
 
     let titleElement = document.createElement('h1');
-    titleElement.innerText = pokemon-list.name;
+    titleElement.innerText = item.name;
 
     let contentElement = document.createElement('p');
     contentElement.innerText = ( 
         item.imageUrl = details.sprites.front_default;
       item.height = details.height;
-      item.types = details.types;);
+      item.types = details.types;
+    );
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     modal.appendChild(contentElement);
     modalContainer.appendChild(modal);
-
 
     modalContainer.classList.add('is-visible');
   }
@@ -54,6 +55,7 @@ let modalContainer = document.querySelector('#modal-container');
   document.querySelector('#show-modal').addEventListener('click', () => {
     showModal();
   });
+    
     
 function add(pokemon){
    if (
@@ -116,10 +118,12 @@ function loadList() {
 function showDetails(item) {
     loadDetails(item).then(function () {
 //        console.log(pokemon);
-        showModal(pokemon);
+        showModal();
   });
 }
     return {
+    showModal: showModal,
+    hideModal: hideModal,
     add: add,
     getAll: getAll,
     addListItem: addListItem,
