@@ -34,7 +34,7 @@ function addListItem(pokemon){
     
     });
 }
-   function loadList() {
+function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
@@ -64,17 +64,18 @@ function loadDetails(item){
 }
 function showDetails(item) {
     loadDetails(item).then(function () {
-        showModal(pokemon);
-  }
+        showModal(item);
+  });
+}
  
 //modal
-function showModal(pokemon) {
+function showModal() {
     //populating name
-    let pokemonName = modalContainer.querySelector(".pokemon-name");
-    pokemonName.innerText = pokemon.name;
+    let pokemonName = modalContainer.querySelector('.pokemon-name');
+    pokemonName.innerText = pokemonList.name;
 
     //populating types
-    let pokemonTypes = modalContainer.querySelector(".types");
+    let pokemonTypes = modalContainer.querySelector('pokemon.type');
     //remove previous types if any
     pokemonTypes.innerHTML = "";
     pokemon.types.forEach((type) => {
@@ -115,7 +116,7 @@ function showModal(pokemon) {
     modalContainer.classList.add("is-visible");
   }
 
-  function hideModal() {
+  function hideModal(item) {
     if (modalContainer.classList.contains("is-visible")) {
     modalContainer.classList.remove("is-visible");
     modalContainer.classList.add("is-not-visible");
@@ -131,8 +132,8 @@ function showModal(pokemon) {
     });
   }
 
-  const closeBtn = document.querySelector("#modal-close");
-  closeBtn.addEventListener("click", hideModal);
+  let closeBtn = document.querySelector('#modal-close');
+  addEventListener("click", hideModal);
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
@@ -153,6 +154,8 @@ function showModal(pokemon) {
     loadList: loadList,
     loadDetails: loadDetails,
     showDetails: showDetails,
+    showModal: showModal,
+    hideModal: hideModal
   };
     
     
