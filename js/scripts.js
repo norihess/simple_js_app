@@ -26,12 +26,10 @@ function addListItem(pokemon){
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('button');
-    addEventListener('click', function() {
-        showDetails(pokemon);
-        
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
-    
+    addEventListener('click', function() {
+        showDetails(pokemon);
     
     });
 }
@@ -61,7 +59,7 @@ function loadList(){
 
 function loadDetails(item){
     let url = item.detailsUrl;
-    return fetch(apiUrl).then(function(response){
+    return fetch(url).then(function(response){
         return response.json();
     }).then(function(details){
         //adding details to item
@@ -97,8 +95,6 @@ function showDetails(item) {
 //    });
 
 //console.log(pokemonRepository.getAll());
-
-pokemonRepository.add({ name: "Pikachu", height: 0.3, types: ["electric"] });
 
 //console.log(pokemonRepository.getAll());
 
