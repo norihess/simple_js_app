@@ -2,7 +2,8 @@
 let pokemonRepository = (function(){
 //list of pokemon
 let pokemonList = [];
-let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';    
+let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; 
+let modalContainer = document.querySelector('#modal-container');
 
 function add(pokemon){
    if (
@@ -34,29 +35,6 @@ function addListItem(pokemon){
     });
 }
 
-//fetch function
-function loadList(){
-    //fetching url of api creating a pomise reuslting a response
-    return fetch(apiUrl).then(function(response){
-        return response.json();
-        //everything is being converted to json
-    }).then(function(json){
-        //josn presents all the date from api
-        //json(main object).results(keys).forEach(items)
-        json.results.forEach(function(item){
-            let pokemon = {
-                //2 keys:values
-                name: item.name,
-                detailsUrl: item.url
-            };
-            //add looks back to add function up top
-            add(pokemon);
-        });
-    }).catch(function(e){
-        console.error(e);
-    })
-}
-
 function loadDetails(item){
     let url = item.detailsUrl;
     return fetch(url).then(function(response){
@@ -72,18 +50,99 @@ function loadDetails(item){
 }
 function showDetails(item) {
     loadDetails(item).then(function () {
-      console.log(item);
+        showModal(pokemon);
+  }
+ 
+//modal
+function showModal(pokemon) {
+    //populating name
+    let pokemonName = modalContainer.querySelector(".pokemon-name");
+    pokemonName.innerText = pokemon.name;
+
+    //populating types
+    let pokemonTypes = modalContainer.querySelector(".types");
+    //remove previous types if any
+    pokemonTypes.innerHTML = "";
+    pokemon.types.forEach((type) => {
+      console.log(type.type.name);
+      let listItem = document.createElement("li");
+      listItem.innerText = type.type.name;
+      pokemonTypes.appendChild(listItem);
+    });
+
+    //populating img
+    let pokemonImage = modalContainer.querySelector(".pokemon-img");
+    pokemonImage.setAttribute("src", pokemon.artworkUrl);
+    pokemonImage.setAttribute(
+      "alt",
+      `Official artwork representing ${pokemon.name}`
+    );
+
+    //populating height and weight
+    let pokemonHeight = modalContainer.querySelector(".pokemon-height");
+    let pokemonWeight = modalContainer.querySelector(".pokemon-weight");
+    pokemonHeight.innerText = pokemon.height;
+    pokemonWeight.innerText = pokemon.weight;
+
+    //populating abilities
+    let abilityList = document.querySelector(".ability-list");
+    abilityList.innerHTML = "";
+
+    pokemon.abilities.forEach((ability) => {
+      console.log(ability.ability.name);
+      let abilityItem = document.createElement("li");
+      abilityItem.innerText = ability.ability.name;
+      abilityList.appendChild(abilityItem);
+    });
+
+    if (modalContainer.classList.contains("is-not-visible")) {
+    modalContainer.classList.remove("is-not-visible");
+    }
+    modalContainer.classList.add("is-visible");
+  }
+
+  function hideModal() {
+    if (modalContainer.classList.contains("is-visible")) {
+    modalContainer.classList.remove("is-visible");
+    modalContainer.classList.add("is-not-visible");
+    }
+  }
+
+  //event listeners
+
+  //addEvent takes care of binding the click event with the event handler
+  function showOnClick(button, pokemon) {
+    button.addEventListener("click", function (event) {
+      showDetails(pokemon);
     });
   }
 
+  const closeBtn = document.querySelector("#modal-close");
+  closeBtn.addEventListener("click", hideModal);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
+      hideModal();
+    }
+  });
+
+  modalContainer.addEventListener("click", (e) => {
+    let target = e.target;
+    if (target === modalContainer) {
+      hideModal();
+    }
+  });
     return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
-    ShowDetails: showDetails
+    showDetails: showDetails,
   };
+    
+    
+
 })();
     
 
