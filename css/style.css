@@ -52,6 +52,7 @@ body {
 .additional-information.is-visible {
   display: block;
 }
+
 #modal-container {
   position: fixed;
   padding: 20px;
@@ -99,4 +100,13 @@ body {
 
 .modal p {
   margin-bottom: 0;
+}
+
+#modal-container {
+  display: none;
+}
+
+#modal-container.is-visible {
+  /* CSS for modal container - add your own desired CSS styles here */
+  display: block;
 }
