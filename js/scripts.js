@@ -72,7 +72,7 @@ function showModal(pokemon) {
 
     //populating img
     let pokemonImage = modalContainer.querySelector(".pokemon-img");
-    pokemonImage.setAttribute("src", pokemon.artworkUrl);
+    pokemonImage.setAttribute("src", pokemon.imageUrl);
     pokemonImage.setAttribute(
       "alt",
       `Official artwork representing ${pokemon.name}`
