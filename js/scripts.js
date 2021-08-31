@@ -30,7 +30,7 @@ function addListItem(pokemon){
     button.classList.add('button');
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
-    addEventListener('click', function() {
+    button.addEventListener('click', function() {
         showDetails(pokemon);
     
     });
@@ -55,12 +55,16 @@ function loadList() {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = details.types;
-    }).catch(function (e) {
+    }) .then(function(details) {
+        // adding the details to the items
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.weight = details.weight;
+        item.types = [];
+        for (let i = 0; i < details.types.length; i++) {
+          item.types.push(details.types[i].type.name);
+        }
+      }).catch(function (e) {
       console.error(e);
     });
   }
@@ -79,7 +83,7 @@ function showModal(pokemon) {
 //details of pokemon
     let pokemonName = document.createElement('h1');
         pokemonName.classList.add('pokemon-name');
-        pokemonName.innerText = pokemon.name;//not working
+        pokemonName.innerText = pokemon.name;
 
     let pokemonSprite = document.createElement('img');
         pokemonSprite.classList.add('pokemon-sprite');
@@ -122,9 +126,9 @@ function showModal(pokemon) {
     }
   });
 
-  document.querySelector('#modal-container').addEventListener('click', () => {
-    showModal();
-  });
+//  document.querySelector('#modal-container').addEventListener('click', () => {
+//    showModal();
+//  });
     
 function showDetails(item) {
     loadDetails(item).then(function () {
@@ -143,18 +147,7 @@ function showDetails(item) {
     showDetails: showDetails,
   };
 })();
-    
 
-
-
-//pokemonRepository.getAll().forEach(function(pokemon){
-//    // document.write('<p>' + pokemonList.name + ' (height:' + pokemonList.height +')</p>');
-//    console.log(pokemon)
-//    });
-
-//console.log(pokemonRepository.getAll());
-
-//console.log(pokemonRepository.getAll());
 
 pokemonRepository.loadList().then(function () {
   // Now the data is loaded!
