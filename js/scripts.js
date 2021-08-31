@@ -79,7 +79,7 @@ function showModal(pokemon) {
 //details of pokemon
     let pokemonName = document.createElement('h1');
         pokemonName.classList.add('pokemon-name');
-        pokemonName.innerText = (pokemon.name);//not working
+        pokemonName.innerText = pokemon.name;//not working
 
     let pokemonSprite = document.createElement('img');
         pokemonSprite.classList.add('pokemon-sprite');
@@ -87,11 +87,11 @@ function showModal(pokemon) {
     
     let pokeHeight = document.createElement('p');
         pokeHeight.classList.add('pokemon-height');
-        pokeHeight.innerText = (pokemon.height);
+        pokeHeight.innerText = pokemon.height;
     
     let contentElement = document.createElement('p');
         contentElement.classList.add('pokemon-types');
-        contentElement.innerText = (pokemon.types);
+        contentElement.innerText = pokemon.types;
 
     //creating boxes 
     modal.appendChild(closeButtonElement);
