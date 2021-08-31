@@ -3,10 +3,75 @@ let pokemonRepository = (function(){
 //list of pokemon
 let pokemonList = [];
 let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; 
+let modalContainer = document.querySelector("#modal-container");   
+    
+function add(pokemon){
+   if (
+      typeof pokemon === "object" &&
+      "name" in pokemon 
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
+  }
 
-let modalContainer = document.querySelector('#modal-container');
-
-function showModal() {
+//create this inside repository so people can access it from outside
+function getAll() {
+    return pokemonList;
+}
+    
+function addListItem(pokemon){
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listpokemon = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button');
+    addEventListener('click', function() {
+        showDetails(pokemon);
+    
+    });
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
+}
+ function showDetails(pokemon) {
+    loadDetails(pokemon).then(function () {
+//        console.log(pokemon);
+        showModal(pokemon);
+  });
+} 
+function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+ 
+ function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      // Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+    //modal
+function showModal(pokemon) {
+//    modalContainer.classList.add('is-visible');
     modalContainer.innerHTML = '';
     let modal = document.createElement('div');
     modal.classList.add('modal');
@@ -20,11 +85,14 @@ function showModal() {
     titleElement.innerText = item.name;
 
     let contentElement = document.createElement('p');
-    contentElement.innerText = ( 
-        item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = details.types;
-    );
+    contentElement.innerText =
+    `height: ${details.height}</br>
+    type: ${details.types.join(', ')}`; 
+//    contentElement.innerText = ();
+    
+    let pokemonSprite = document.createElement('img');
+    pokemonSprite.classList.add('pokemon-sprite');
+    pokemonSprite.src = item.imageUrl;
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
@@ -52,88 +120,19 @@ function showModal() {
     }
   });
 
-  document.querySelector('#show-modal').addEventListener('click', () => {
+  document.querySelector('#modal-container').addEventListener('click', () => {
     showModal();
   });
-    
-    
-function add(pokemon){
-   if (
-      typeof pokemon === "object" &&
-      "name" in pokemon 
-    ) {
-      pokemonList.push(pokemon);
-    } else {
-      console.log("pokemon is not correct");
-    }
-  }
-
-//create this inside repository so people can access it from outside
-function getAll() {
-    return pokemonList;
-}
-    
-function addListItem(pokemon){
-    let pokemonList = document.querySelector('.pokemon-list');
-    let listpokemon = document.createElement('li');
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('button');
-    listpokemon.appendChild(button);
-    pokemonList.appendChild(listpokemon);
-    addEventListener('click', function() {
-        showDetails(pokemon);
-    
-    });
-}
-function loadList() {
-    return fetch(apiUrl).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      json.results.forEach(function (item) {
-        let pokemon = {
-          name: item.name,
-          detailsUrl: item.url
-        };
-        add(pokemon);
-      });
-    }).catch(function (e) {
-      console.error(e);
-    })
-  }
-    
- function loadDetails(item) {
-    let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = details.types;
-    }).catch(function (e) {
-      console.error(e);
-    });
-  }
-function showDetails(item) {
-    loadDetails(item).then(function () {
-//        console.log(pokemon);
-        showModal();
-  });
-}
     return {
-    showModal: showModal,
-    hideModal: hideModal,
     add: add,
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
     showDetails: showDetails,
+    showModal: showModal,
+    hideModal: hideModal
   };
-    
-    
-
 })();
     
 
