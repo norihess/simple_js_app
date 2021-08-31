@@ -72,7 +72,7 @@ body {
   
   /* this is used to center the modal */
   display: grid;
-  text-align: center;
+  text-align: left;
 }
 
 .modal {
