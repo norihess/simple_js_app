@@ -3,8 +3,9 @@ let pokemonRepository = (function(){
 //list of pokemon
 let pokemonList = [];
 let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; 
-let modalContainer = document.querySelector("#modal-container");   
-    
+
+let modalContainer = document.querySelector("#modal-container");
+      
 function add(pokemon){
    if (
       typeof pokemon === "object" &&
@@ -27,19 +28,13 @@ function addListItem(pokemon){
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('button');
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
     addEventListener('click', function() {
         showDetails(pokemon);
     
     });
-    listpokemon.appendChild(button);
-    pokemonList.appendChild(listpokemon);
 }
- function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
-//        console.log(pokemon);
-        showModal(pokemon);
-  });
-} 
 function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -55,7 +50,7 @@ function loadList() {
       console.error(e);
     })
   }
- 
+    
  function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
@@ -69,7 +64,7 @@ function loadList() {
       console.error(e);
     });
   }
-    //modal
+//modal
 function showModal(pokemon) {
 //    modalContainer.classList.add('is-visible');
     modalContainer.innerHTML = '';
@@ -82,18 +77,16 @@ function showModal(pokemon) {
     closeButtonElement.addEventListener('click', hideModal);
 
     let titleElement = document.createElement('h1');
-    titleElement.innerText = item.name;
+    titleElement.innerText = pokemon.name;
 
-    let contentElement = document.createElement('p');
-    contentElement.innerText =
-    `height: ${details.height}</br>
-    type: ${details.types.join(', ')}`; 
-//    contentElement.innerText = ();
-    
     let pokemonSprite = document.createElement('img');
     pokemonSprite.classList.add('pokemon-sprite');
-    pokemonSprite.src = item.imageUrl;
-
+    pokemonSprite.src = pokemon.imageUrl;
+    
+    let contentElement = document.createElement('p');
+    contentElement.innerHtml = 'Height: pokemon.height <br> type: pokemon.types.join'; 
+//    contentElement.innerText = ();
+    
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     modal.appendChild(contentElement);
@@ -123,15 +116,21 @@ function showModal(pokemon) {
   document.querySelector('#modal-container').addEventListener('click', () => {
     showModal();
   });
+function showDetails(item) {
+    loadDetails(item).then(function () {
+//        console.log(pokemon);
+        showModal(item);
+  });
+}
     return {
+    showModal: showModal,
+    hideModal: hideModal,
     add: add,
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
     showDetails: showDetails,
-    showModal: showModal,
-    hideModal: hideModal
   };
 })();
     
