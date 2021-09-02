@@ -28,9 +28,11 @@ function addListItem(pokemon){
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('button');
+    button.setAttribute("data-target", "#pokemonModal");
+    button.setAttribute("data-toggle", "modal");
+    button.setAttribute("style", "color: #000000");
     listpokemon.append(button);
     pokemonList.append(listpokemon);
-     button.setAttribute("data-target", "#Modal");
     button.addEventListener('click', function() {
         showDetails(pokemon);
     
