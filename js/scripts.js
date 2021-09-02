@@ -30,6 +30,7 @@ function addListItem(pokemon){
     button.classList.add('button');
     listpokemon.append(button);
     pokemonList.append(listpokemon);
+     button.setAttribute("data-target", "#Modal");
     button.addEventListener('click', function() {
         showDetails(pokemon);
     
@@ -57,7 +58,9 @@ function loadList() {
       return response.json();
     }) .then(function(details) {
         // adding the details to the items
-        item.imageUrl = details.sprites.front_default;
+        item.imageUrlFront = details.sprites.front_default;
+        item.imageUrlBack = details.sprites.back_default;
+//        item.imageUrl = details.sprites.front_default;
         item.height = details.height;
         item.weight = details.weight;
         item.types = [];
