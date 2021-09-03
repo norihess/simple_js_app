@@ -25,17 +25,26 @@ function getAll() {
 function addListItem(pokemon){
     let pokemonList = $('.pokemon-group');
     let listpokemon = document.createElement('li');
-    let button = document.createElement('button');
+    let button =
+    document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add('button');
-    button.setAttribute("data-target", "#pokemonModal");
-    button.setAttribute("data-toggle", "modal");
-    button.setAttribute("style", "color: #000000");
+    
+    $('button').addClass('button');
+    $('button').attr("data-target", "#pokemonModal");
+    $('button').attr("data-toggle", "modal");
+    $('button').attr("style", "color: #000000");
+    
+//    button.setAttribute("data-target", "#pokemonModal");
+//    button.setAttribute("data-toggle", "modal");
+//    button.setAttribute("style", "color: #000000");
     listpokemon.append(button);
     pokemonList.append(listpokemon);
+    
+//    $('button').on('click', function(){
+//        showDetails(pokemon);
+//    });
     button.addEventListener('click', function() {
         showDetails(pokemon);
-    
     });
 }
 function loadList() {
