@@ -3,7 +3,7 @@ let pokemonRepository = (function(){
 //list of pokemon
 let pokemonList = [];
 let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-
+let searchInput = $('#search-bar');
 //let modalContent = $('.modal-content');
 
 function add(pokemon){
@@ -124,6 +124,17 @@ function showDetails(item) {
         showModal(item);
   });
 }
+//search bar
+     searchInput.addEventListener("input", function() {
+       let listPokemon = $("li");
+       let value = searchInput.value.toUpperCase();
+
+       pokemonRepository.forEach(function(pokemon) {
+         if (pokemon.innerText.toUpperCase().indexOf(value) < 0) {
+           pokemon.style.display = "none";
+         }
+       });
+
     return {
     add: add,
     getAll: getAll,
